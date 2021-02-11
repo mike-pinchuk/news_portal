@@ -14,7 +14,7 @@ import { UserModule } from './user/user.module';
     username: typedEnv.DB_USER,
     password: typedEnv.DB_PASSWORD,
     database: typedEnv.DB_NAME,
-    entities: [__dirname + '/../**/*.entity{.ts,.js}']
+    entities: [__dirname + '/**/*.entity{.ts,.js}']
   }), UserModule],
   controllers: [AppController],
   providers: [AppService],

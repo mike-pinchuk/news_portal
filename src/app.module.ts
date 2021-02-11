@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { typedEnv } from './utils/typed-env';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -14,7 +15,7 @@ import { typedEnv } from './utils/typed-env';
     password: typedEnv.DB_PASSWORD,
     database: typedEnv.DB_NAME,
     entities: [__dirname + '/../**/*.entity{.ts,.js}']
-  })],
+  }), UserModule],
   controllers: [AppController],
   providers: [AppService],
 })

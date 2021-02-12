@@ -4,7 +4,7 @@ import { typedEnv } from 'src/utils/typed-env';
 
 @Injectable()
 export class AuthService {
-    createToken(userId: string) {
+    createToken(userId: string | undefined) {
         const token = jwt.sign({ id: userId }, typedEnv.JWT_SECRET);
         return { token }
     }

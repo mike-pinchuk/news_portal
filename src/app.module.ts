@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { typedEnv } from './utils/typed-env';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,7 +16,7 @@ import { UserModule } from './user/user.module';
     password: typedEnv.DB_PASSWORD,
     database: typedEnv.DB_NAME,
     entities: [__dirname + '/**/*.entity{.ts,.js}']
-  }), UserModule],
+  }), UserModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

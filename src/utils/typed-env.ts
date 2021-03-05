@@ -3,10 +3,14 @@ import * as Joi from 'joi'
 
 const requiredEnvs = {
     DB_HOST: Joi.string().required(),
-    DB_PORT: Joi.number().required(),
+    DB_PORT: Joi.number(),
     DB_USER: Joi.string().required(),
     DB_PASSWORD: Joi.string().required(),
     DB_NAME: Joi.string().required()
+}
+
+const secretCodeEnv = {
+    JWT_SECRET: Joi.string().required()
 }
 
 const optionsEnvs = {
@@ -19,7 +23,8 @@ const optionsEnvs = {
 
 const envs = {
     ...requiredEnvs,
-    ...optionsEnvs
+    ...optionsEnvs,
+    ...secretCodeEnv
 };
 
 if (process.env.NODE_ENV === 'development') {
@@ -38,7 +43,7 @@ const validateAndReturnTypedEnv = () => {
     keys.forEach(key => {
         globalEnvs[key] = process.env[key];
     });
-    const { error, value } = Joi.object(requiredEnvs).concat(Joi.object(optionsEnvs))
+    const { error, value } = Joi.object(requiredEnvs).concat(Joi.object(optionsEnvs)).concat(Joi.object(secretCodeEnv))
         .validate(globalEnvs, { allowUnknown: false, abortEarly: true });
     if (error) {
         throw new Error(error.message);
